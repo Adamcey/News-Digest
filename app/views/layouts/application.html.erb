@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <title>TheDigest</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div class="container">
+  	<ul class="nav nav-pills">
+      <% if (current_user != nil) %>
+        <%= link_to 'Home', articles_path, class: "btn btn-default" %>
+        <%= link_to 'Interests', interests_path(current_user), class: "btn btn-default" %>
+        <%= link_to 'Edit user', edit_user_path(current_user), class: "btn btn-default" %>
+        <%= link_to 'Log out', logout_path, method: :delete, class: "btn btn-default" %>
+        <%= link_to 'Destroy account', current_user, method: :delete, class: "btn btn-default" %>
+        <%= link_to 'Scrape', scrape_path, class: "btn btn-default" %>
+      <% end %>
+    </ul>
+    <%= yield %>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+  	<h2><%= article.title %></h2>
+    <small>Published On: <%= article.publication_date%></small>
+    <small>Author: <%= article.author%></small>
+  	<p>Link: <%= article.link %></p>
+    <p>Summary: <%= article.summary %></p>
+    <p>Images: <%= article.images %></p>
+  	<p>Section: <%= article.tag_list.join(', ') %></p>
+  	
+    <div class="btn-group pull-right" role="group">
+	  	<%= link_to 'Show', article, class: "btn btn-default" %>
+	  </div>
+  </div>
+</div>
