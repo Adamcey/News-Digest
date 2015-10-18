@@ -1,12 +1,13 @@
 # Author: Sangzhuoyang Yu
 # Id:     747838
 # Date:   18/09/2015
-# This is a subclass extended from importer, which is specifically 
+# This is a subclass extended from Scraper, which is specifically 
 # implemented for scraping article information from The New York 
 # Times website.
 
-module Importers    
-  class Importer_NY < Importer
+
+module Scrapers
+  class Scraper_NY < Scrapers::Scraper
     def initialize
       super
     end
@@ -38,8 +39,9 @@ module Importers
     # Parse the content and find key information from the hash
     def parse
       source_id = Source.find_by(name: 'The New York Times').id
+      articles = []
 
-      @response_json['response']['docs'].each{|hash_article|
+      @response_json['response']['docs'].each do |hash_article|
         puts hash_article.to_s
 
         # Find author
@@ -81,9 +83,16 @@ module Importers
           section = ''
         end
 
-        # Store all scraped data as a New York Times article
-        store_data(author, title, summary, images, link, date, section, source_id)
-      }
+        if !Article.find_by(title: title)
+          article = Article.new(title: title, publication_date: date, 
+            summary: summary, author: author, images: images, link: link, 
+            source_id: source_id)
+
+          articles.push(article)
+        end
+      end
+
+      return articles
     end
   end
 end

@@ -2,34 +2,34 @@
 # Id:     747838
 # Date:   18/09/2015
 # This is a subclass extended from importer, which is specifically 
-# implemented for scraping article information from The Heral Sun News
-# RSS.
+# implemented for scraping article information from The SBS News
+# website.
 
-
-module Importers
-  class Importer_Theheraldsun < Importer
+module Scrapers
+  class Scraper_SBS < Scrapers::Scraper
     def initialize
       super
     end
 
     def scrape
-      source_url = 'http://feeds.news.com.au/heraldsun/rss/heraldsun_news_breakingnews_2800.xml'
-      source_id = Source.find_by(name: 'The Herald Sun').id
+      source_url = 'http://www.sbs.com.au/news/rss/news/business.xml'
+      source_id = Source.find_by(name: 'SBS').id
+      articles = []
 
       open(source_url) do |rss|
         # Add false as the second attribute telling ruby not to validate value
         feed = RSS::Parser.parse(rss, false)
 
         # Find section
-        section = feed.channel.title.split(/\|/)[2].downcase
+        section = feed.channel.title.downcase
+
+        # Author isn't presented
+        author = ''
 
         # Find images
         images = ''
 
         feed.items.each do |item|
-          # Author isn't presented
-          author = ''
-
           # Find date
           date = Date.new(item.pubDate.year, 
           item.pubDate.month, item.pubDate.day).to_s
@@ -38,15 +38,22 @@ module Importers
           title = item.title
           
           #　Find summary
-          summary = item.description
+          summary = item.description.split(/\<br/)[0]
 
           # Find source
           link = item.link
 
-          # Store all scraped data as an AGE article
-          store_data(author, title, summary, images, link, date, section, source_id)
+          if !Article.find_by(title: title)
+            article = Article.new(title: title, publication_date: date, 
+              summary: summary, author: author, images: images, link: link, 
+              source_id: source_id)
+
+            articles.push(article)
+          end
         end
       end
+      
+      return articles
     end
   end
 end
