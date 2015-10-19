@@ -14,10 +14,23 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+<<<<<<< HEAD
+# Emailing gem
+=======
+>>>>>>> 17e99a5ceb629b12b2f00a744a30787b885ea7dd
 gem 'mandrill-api', '~> 1.0.53'
 
 gem 'mandrill_mailer'
 
+<<<<<<< HEAD
+# Tagging gems
+gem 'open_calais'
+gem 'sentimental'
+gem 'alchemy-api-rb', :require => 'alchemy_api'
+gem 'indico'
+
+=======
+>>>>>>> 17e99a5ceb629b12b2f00a744a30787b885ea7dd
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
