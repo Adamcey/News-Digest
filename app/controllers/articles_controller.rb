@@ -20,19 +20,10 @@ class ArticlesController < ApplicationController
 
   # Refresh the article page, scraping new article data
   def scrape
-<<<<<<< HEAD
     articles = Scrapers::Importer.new.import
     articles = Taggers::TaggingMachine.new.tag(articles)
 
     Article.storeData(articles)
-=======
-    Importers::Importer_SBS.new.scrape
-    Importers::Importer_Theabc.new.scrape
-    Importers::Importer_Theheraldsun.new.scrape
-    Importers::Importer_Theage.new.scrape
-    Importers::Importer_Thesydney.new.scrape
-    Importers::Importer_NY.new.scrape
->>>>>>> 17e99a5ceb629b12b2f00a744a30787b885ea7dd
 
     redirect_to articles_url
   end
