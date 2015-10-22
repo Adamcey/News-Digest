@@ -16,7 +16,7 @@ module Taggers
       articles.each do |article|
         if (!article.summary.empty?)
           ind_keywords = Indico.keywords article.summary
-          puts article.summary
+          #  puts article.summary
 
           ind_keywords.each do |k, v|
             article.tag_list.add(k, parse: true)
@@ -27,10 +27,11 @@ module Taggers
           ind_tags_sorted.each do |k, v|
             article.tag_list.add(k, parse: true)
           end
+          article.save
         end
       end
 
-      return articles
+      #  return articles
     end
   end
 end

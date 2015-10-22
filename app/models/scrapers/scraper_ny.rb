@@ -42,7 +42,7 @@ module Scrapers
       articles = []
 
       @response_json['response']['docs'].each do |hash_article|
-        puts hash_article.to_s
+       # puts hash_article.to_s
 
         # Find author
         if hash_article.has_key? 'byline'

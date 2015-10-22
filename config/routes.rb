@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'articles/index', to: 'articles#interests', as: :interests
   get 'articles/scrape', to: 'articles#scrape', as: :scrape
+  post 'articles/search', to: 'articles#search', as: :search
 
   resources :users
   resources :articles
