@@ -8,7 +8,7 @@
 
 user = User.create!(first_name: 'Sang', last_name: 'Yu', 
 	email: 'yu@unimelb.edu.au', bio: 'Some really awesome author that wrote some stuff',
-	username: 'yusang', password: 'aaa', password_confirmation: 'aaa', tag_list: 'afl')
+	username: 'yusang', password: 'aaa', password_confirmation: 'aaa', subscribed: 'true', tag_list: 'afl')
 
 s = Source.create!(name: 'SBS')
 s2 = Source.create!(name: 'TheAge')

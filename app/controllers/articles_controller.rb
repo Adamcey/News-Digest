@@ -21,7 +21,12 @@ class ArticlesController < ApplicationController
   # Refresh the article page, scraping new article data
   def scrape
     articles = Scrapers::Importer.new.import
-    articles = Taggers::TaggingMachine.new.tag(articles)
+    #articles = Taggers::TaggingMachine.new.tag(articles)
+
+    # Test finding interests
+    articles.each do |a|
+      a.tag_list.add('sport')
+    end
 
     Article.storeData(articles)
 

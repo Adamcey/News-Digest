@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914041703) do
+ActiveRecord::Schema.define(version: 20151023030704) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -27,11 +27,13 @@ ActiveRecord::Schema.define(version: 20150914041703) do
 
   add_index "articles", ["source_id"], name: "index_articles_on_source_id"
 
-  create_table "importers", force: :cascade do |t|
-    t.string   "sourcename"
-    t.string   "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "emailings", force: :cascade do |t|
+    t.string   "username"
+    t.string   "article_title"
+    t.integer  "user_id"
+    t.integer  "article_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "sources", force: :cascade do |t|
@@ -69,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150914041703) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.boolean  "subscribed"
   end
 
 end

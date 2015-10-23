@@ -41,10 +41,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def emailMyself
-    Emailer.sendEmail.deliver
+  #def subscribe
+  #  current_user.subscribe = true
+  #end
 
-    redirect_to home_path
+  def emailMyself
+    articles = Article.getNewArticles(current_user)
+    
+    Emailer.sendEmail(current_user, articles).deliver
+
+    redirect_to articles_url
   end
 
   # Destroy user and go back to home page

@@ -1,8 +1,8 @@
 class Emailer < ActionMailer::Base
   default from: 'no-reply@yuszy.com'
-  default to: 'yuszy@outlook.com'
 
-  def sendEmail
-  	mail(subject: 'hello mail')
+  def sendEmail user, articles
+    @articles = articles
+  	mail(to: user.email, subject: "hello #{user.username}, new Articles coming!")
   end
 end

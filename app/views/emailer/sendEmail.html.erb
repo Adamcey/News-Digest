@@ -1,1 +1,9 @@
-<h1> Hello mail:  </h1>
+<h1>New Articles</h1>
+
+<% if @articles.empty? %>
+  <h1>No new Articles matching your interests :(</h1>
+<% else %>
+  <% @articles.each do |article| %>
+    <%= render partial: 'index_email_article', locals: {article: article} %>
+  <% end %>
+<% end %>

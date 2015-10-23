@@ -6,10 +6,14 @@ class User < ActiveRecord::Base
   validates :first_name, format: { with: /\A[a-zA-Z]+\z/, message: "%{value} is not a valid first name" }
   validates :last_name, format: { with: /\A[a-zA-Z]+\z/, message: "%{value} is not a valid last name" }
   validates :tag_list, format: { with: /\A[\w\s\,]+\z/, message: "%{value} is not a valid tag" }
+  validates :username, uniqueness: true
 
   acts_as_taggable
   # Users can have interests
   acts_as_taggable_on :interests
+
+  has_many :emailings
+  has_many :articles, :through => :emailing
 
   has_secure_password
 
@@ -22,6 +26,12 @@ class User < ActiveRecord::Base
     else
 	    return nil
     end
+  end
+
+  def self.getSubscribers
+    # where() always return an array whereas find_by() could return an
+    # object when there is only one value found
+    User.where(subscribed: true)
   end
 
   def full_name
