@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.all.reverse
+    @articles = @articles.sort_by {|a| a.publication_date}
   end
 
   # GET /articles/1
@@ -22,11 +23,54 @@ class ArticlesController < ApplicationController
   def scrape
     articles = Scrapers::Importer.new.import
     articles = Taggers::TaggingMachine.new.tag(articles)
-
-    Article.storeData(articles)
+    # articles.map do |article|
+    #   article.save
+    # end
 
     redirect_to articles_url
   end
+
+  def search
+    @keyword = params[:search][:query]
+
+    #lack : keyword in string ,souce include, cant multiple choice
+
+    if (@keyword != nil)
+
+      #@articles = Article.tagged_with(@keyword, :any => true)
+      calculateWeight(@keyword)
+      @articles = Article.all.find_all { |a| a.weight != 0 }
+      @articles = @articles.sort_by { |a| a.weight}
+      @articles = @articles.reverse
+    else
+      #@articles = Article.tagged_with(nil, :any => true)
+
+    end
+
+  end
+
+  def calculateWeight keyword
+    Article.all.each do |article|
+      article.weight = 0
+      if (article.tag_list.include?(keyword))
+        article.weight += 4
+      end
+      if article.title.include?(keyword)
+        article.weight += 3
+      end
+      if article.summary.include?(keyword)
+        article.weight += 2
+      end
+      # if article.source.include?(keyword)
+      #   article.weight += 1
+      # end
+
+      article.save
+    end
+  end
+
+ 
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -27,10 +27,9 @@ module Taggers
           ind_tags_sorted.each do |k, v|
             article.tag_list.add(k, parse: true)
           end
+          article.save
         end
       end
-
-      return articles
     end
   end
 end

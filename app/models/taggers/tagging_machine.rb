@@ -4,6 +4,11 @@ module Taggers
       @taggers = []
       
       @taggers.push(TaggerIndico.new)
+      @taggers.push(TaggerOpencalais.new)
+      @taggers.push(TaggerAlchemy.new)
+      @taggers.push(TaggerSentimental.new)
+      @taggers.push(TaggerLast.new)
+       
       
     end
 
