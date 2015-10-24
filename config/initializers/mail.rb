@@ -5,7 +5,6 @@ ActionMailer::Base.smtp_settings = {
     :port      => 587,
     :user_name => 'sangzhouyangy@163.com',
     :password  => 'Irfi-GFoNEFLr_mNHUcy0w',
-    #:domain    => 'localhost:3000'
     :authentication => 'login'
   }
 

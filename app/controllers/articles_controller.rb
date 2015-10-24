@@ -14,16 +14,8 @@ class ArticlesController < ApplicationController
 
   # Retrieve all article data that match the user interests
   def interests
-    @articles = Article.tagged_with(current_user.tag_list, :any => true)
-    render 'index'
-  end
-
-  # Refresh the article page, scraping new article data
-  def scrape
-    @articles = Scrapers::Importer.new.import
-    Taggers::TaggingMachine.new.tag(@articles)
-
-    #Article.storeData(@articles)
+    # Find articles relavent to user interests using Thesaurus api
+    @articles = Article.find_interests(Article.all, current_user).reverse
 
     render 'index'
   end
@@ -44,7 +36,6 @@ class ArticlesController < ApplicationController
       #@articles = Article.tagged_with(nil, :any => true)
 
     end
-
   end
 
   def calculateWeight keyword
@@ -68,7 +59,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_article
@@ -79,5 +69,4 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:source, :title, :publication_date, :summary, :author, :images, :link)
   end
-
 end

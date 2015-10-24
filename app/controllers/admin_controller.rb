@@ -10,4 +10,14 @@ class AdminController < ApplicationController
 
     redirect_to articles_url
   end
+
+  # Refresh the article page, scraping new article data
+  def scrape
+    @articles = Scrapers::Importer.new.import
+    Taggers::TaggingMachine.new.tag(@articles)
+
+    #Article.storeData(@articles)
+
+    redirect_to articles_url
+  end
 end

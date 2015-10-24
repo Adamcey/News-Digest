@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'articles/search', to: 'articles#search', as: :search
 
   get 'admin/email', to: 'admin#sendEmailToSubscribers', as: :sendEmails
+  get 'admin/scrape', to: 'admin#scrape', as: :scrapeArticles
 
   resources :users
   resources :articles
