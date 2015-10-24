@@ -2,9 +2,9 @@ module Taggers
   class TaggingMachine
     def initialize
       @taggers = []
-      
+
       @taggers.push(TaggerIndico.new)
-      
+
     end
 
     # Tag scraped articles
@@ -13,7 +13,7 @@ module Taggers
         tagger.generateTags(articles)
       end
 
-      return articles
+      #  return articles
     end
   end
 end
