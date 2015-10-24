@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
   # Validations
-  validates_presence_of :email, :first_name, :last_name, :username, :tag_list
+  validates_presence_of :email, :first_name, :last_name, :username
   validates :email, format: { with: /(.+)@(.+).[a-z]{2,4}/, message: "%{value} is not a valid email" }
   validates :username, format: { with: /\A[\w]+\z/, message: "%{value} is not a valid username" }
   validates :first_name, format: { with: /\A[a-zA-Z]+\z/, message: "%{value} is not a valid first name" }
   validates :last_name, format: { with: /\A[a-zA-Z]+\z/, message: "%{value} is not a valid last name" }
-  validates :tag_list, format: { with: /\A[\w\s\,]+\z/, message: "%{value} is not a valid tag" }
+  validates :tag_list, format: { with: /\A[\w\s\,]*\z/, message: "%{value} is not a valid tag" }
   validates :username, uniqueness: true
 
   acts_as_taggable

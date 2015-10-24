@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params_create)
     @user.tag_list.add(params[:tag_list], parse: true)
 
   	respond_to do |format|
@@ -33,17 +33,15 @@ class UsersController < ApplicationController
     @user.tag_list = params[:tag_list]
 
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(user_params_update)
+        puts 'subscribed: '
+        puts @user.subscribed
         format.html { redirect_to articles_url, notice: 'User was successfully updated.' }
       else
         format.html { render :edit }
       end
     end
   end
-
-  #def subscribe
-  #  current_user.subscribe = true
-  #end
 
   def emailMyself
     articles = Article.getNewArticles(current_user)
@@ -78,8 +76,13 @@ class UsersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
+    def user_params_create
       params.require(:user).permit(:first_name, :last_name, :email, :bio, 
-      :username, :password, :password_confirmation, :tag_list)
+      :username, :password, :password_confirmation, :subscribed, :tag_list)
+    end
+
+    def user_params_update
+      params.require(:user).permit(:first_name, :last_name, :email, :bio, 
+      :password, :password_confirmation, :subscribed, :tag_list)
     end
 end

@@ -40,6 +40,10 @@
     <%= text_field_tag :tag_list, nil, class: 'form-control' %>
   </div>
   <div class="form-group">
+    <%= f.label 'subscribe news digests' %>
+    <%= f.check_box :subscribed%>
+  </div>
+  <div class="form-group">
     <%= f.submit 'Update', class: 'btn btn-default' %>
   </div>
 <% end %>

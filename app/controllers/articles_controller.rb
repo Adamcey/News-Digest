@@ -23,11 +23,6 @@ class ArticlesController < ApplicationController
     articles = Scrapers::Importer.new.import
     #articles = Taggers::TaggingMachine.new.tag(articles)
 
-    # Test finding interests
-    articles.each do |a|
-      a.tag_list.add('sport')
-    end
-
     Article.storeData(articles)
 
     redirect_to articles_url
