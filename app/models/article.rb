@@ -40,9 +40,18 @@ class Article < ActiveRecord::Base
   # Find out articles matching user interests
   def self.find_interests articles, user
     interests = []
+    keywords = []
 
+    synonyms_finder = SynonymsFinder.new
+
+    # Get all related keywords using synonyms finder
+    user.tag_list.each do |interest|
+      keywords = keywords + synonyms_finder.getSynonyms(interest)
+    end
+    
+    # Get all new articles matching the user interests
     articles.each do |article|
-      shared = article.tag_list & user.tag_list
+      shared = article.tag_list & keywords
       
       unless shared.empty?
         interests.push(article)

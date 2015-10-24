@@ -16,7 +16,6 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Emailing gem
 gem 'mandrill-api', '~> 1.0.53'
-
 gem 'mandrill_mailer'
 
 # Tagging gems
@@ -60,5 +59,10 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+# Rspec for testing
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
 end
 
