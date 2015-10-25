@@ -11,7 +11,6 @@ class SynonymsFinder
     synonymses = []
     synonymses.push(word)
 
-
     uri = URI.parse(@url)
     http = Net::HTTP.new(uri.host, uri.port)
     request_url = '/api/2/' << @KEY << '/' << word << '/' <<'json'
@@ -25,7 +24,10 @@ class SynonymsFinder
     end
 
     return synonymses
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
   end
 
   def parse
