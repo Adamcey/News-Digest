@@ -4,4 +4,8 @@
 
 <% @articles.each do |article| %>
   <%= render partial: 'index_article', locals: {article: article} %>
+
+<% end %>
+<% if @articles.count > 10 %>
+    <%= will_paginate @articles %>
 <% end %>

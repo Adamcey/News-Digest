@@ -21,7 +21,7 @@ gem 'mandrill_mailer'
 # Tagging gems
 gem 'open_calais'
 gem 'sentimental'
-gem 'alchemy-api-rb', :require => 'alchemy_api'
+gem 'alchemy-api-rb'#, :require => 'alchemy_api'
 gem 'indico'
 
 # Use jquery as the JavaScript library
@@ -66,3 +66,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
 end
 
+gem 'will_paginate', '~> 3.0', '>= 3.0.7'
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -8,16 +8,24 @@ class SynonymsFinder
   end
 
   def getSynonyms word
-    send_request(word)
-    return parse
-  end
+    synonymses = []
+    synonymses.push(word)
 
-  def send_request word
+
     uri = URI.parse(@url)
     http = Net::HTTP.new(uri.host, uri.port)
     request_url = '/api/2/' << @KEY << '/' << word << '/' <<'json'
     response = http.send_request('GET', request_url)
-    @response_json = JSON.parse(response.body)
+
+    if response.code == '200'
+      puts 'response: 2000000000000000000000'
+      @response_json = JSON.parse(response.body)
+
+      synonymses = synonymses + parse
+    end
+
+    return synonymses
+
   end
 
   def parse

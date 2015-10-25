@@ -14,16 +14,16 @@ module Taggers
       Indico.api_key = @API_KEY
 
       articles.each do |article|
-        if (!article.summary.empty?)
-          ind_keywords = Indico.keywords article.summary
+        if (!article.title.empty?)
+          ind_keywords = Indico.keywords article.title
           #  puts article.summary
 
           ind_keywords.each do |k, v|
             article.tag_list.add(k, parse: true)
           end
 
-          ind_tags = Indico.text_tags article.summary
-          ind_tags_sorted = ind_tags.sort_by { |_k, v| -1.0 * v }.first(10).to_h
+          ind_tags = Indico.text_tags article.title
+          ind_tags_sorted = ind_tags.sort_by { |_k, v| -1.0 * v }.first(3).to_h
           ind_tags_sorted.each do |k, v|
             article.tag_list.add(k, parse: true)
           end
@@ -31,7 +31,6 @@ module Taggers
         end
       end
 
-      #  return articles
     end
   end
 end

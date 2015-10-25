@@ -4,6 +4,11 @@ module Taggers
       @taggers = []
 
       @taggers.push(TaggerIndico.new)
+      @taggers.push(TaggerOpencalais.new)
+      @taggers.push(TaggerAlchemy.new)
+      @taggers.push(TaggerSentimental.new)
+      @taggers.push(TaggerLast.new)
+
 
     end
 
@@ -13,7 +18,7 @@ module Taggers
         tagger.generateTags(articles)
       end
 
-      #  return articles
+      return articles
     end
   end
 end

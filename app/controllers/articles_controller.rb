@@ -4,7 +4,10 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all.reverse
+    #@articles = Article.all.reverse
+
+    @articles = Article.paginate( :page => params[:page], :per_page => 10).order('publication_date DESC').page(params[:page])
+
   end
 
   # GET /articles/1
@@ -30,10 +33,10 @@ class ArticlesController < ApplicationController
       #@articles = Article.tagged_with(@keyword, :any => true)
       calculateWeight(@keyword)
       @articles = Article.all.find_all { |a| a.weight != 0 }
-       @articles = @articles.sort_by { |a| a.weight}
-      @articles = @articles.reverse
+       @articles = @articles.sort_by { |a| [a.weight, a.publication_date]}
+      #@articles = @articles.reverse
     else
-      #@articles = Article.tagged_with(nil, :any => true)
+      @articles = nil
 
     end
   end
@@ -41,18 +44,18 @@ class ArticlesController < ApplicationController
   def calculateWeight keyword
     Article.all.each do |article|
       article.weight = 0
-      # if (article.tag_list.include?(keyword))
-      #   article.weight += 4
-      # end
+      if (article.tag_list.include?(keyword))
+        article.weight += 4
+      end
       if article.title.include?(keyword)
         article.weight += 3
       end
       if article.summary.include?(keyword)
         article.weight += 2
       end
-      # if article.source.include?(keyword)
-      #   article.weight += 1
-      # end
+      if Source.find_by(article.source_id).name.include?(keyword)
+        article.weight += 1
+      end
 
 
       article.save
