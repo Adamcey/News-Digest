@@ -6,13 +6,6 @@ class Article < ActiveRecord::Base
 
   acts_as_taggable
 
-  # Store the key information found in the hash into database
-  def self.storeData articles
-    articles.each do |article|
-      article.save
-    end
-  end
-
   # Retrieve article data to be sent to users
   def self.getNewArticles user
     article_ids = []
@@ -59,5 +52,44 @@ class Article < ActiveRecord::Base
     end
 
     return interests.first(10)
+  end
+
+  def self.calculateWeight keyword
+    articles = Article.all
+    articles_hash = Hash.new
+    keyword = keyword.downcase
+
+    articles.each do |article|
+      weight = 0
+
+      article.tag_list.each do |tag|
+        if (tag.downcase.include?(keyword))
+          weight += 4
+
+          break
+        end
+      end
+
+      if article.title.downcase.include?(keyword)
+        weight += 3
+      end
+      if article.summary.downcase.include?(keyword)
+        weight += 2
+      end
+      if Source.where(source_id: article.source_id).name.downcase.include?(keyword)
+        weight += 1
+      end
+
+      if (weight != 0)
+        articles_hash[article] = weight
+      end
+    end
+
+    articles_hash = articles_hash.sort_by {|key, value| key.publication_date}.reverse.to_h
+    articles_hash = articles_hash.sort_by {|key, value| -value}.to_h
+
+    articles = articles_hash.keys
+
+    return articles
   end
 end

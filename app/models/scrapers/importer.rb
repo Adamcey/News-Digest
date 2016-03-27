@@ -9,6 +9,8 @@ module Scrapers
       @scrapers.push(Scraper_Theheraldsun.new)
       @scrapers.push(Scraper_Thesydney.new)
       @scrapers.push(Scraper_SBS.new)
+      #@scrapers.push(Scraper_ABC.new)
+      @scrapers.push(Scraper_Guardian.new)
     end
 
     def import

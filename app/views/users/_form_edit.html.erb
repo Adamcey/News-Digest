@@ -45,5 +45,6 @@
   </div>
   <div class="form-group">
     <%= f.submit 'Update', class: 'btn btn-default' %>
+    <%= link_to 'Delete account', current_user, method: :delete, class: "btn btn-default" %>
   </div>
 <% end %>

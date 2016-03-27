@@ -63,7 +63,7 @@ module Scrapers
         
         # Find images
         if !hash_article['multimedia'].empty?
-          images = 'http://api.nytimes.com' << hash_article['multimedia'][0]['url']
+          images = hash_article['multimedia'].map { |m| "http://www.nytimes.com/"+m["url"] }.first
         else
           images = ''
         end

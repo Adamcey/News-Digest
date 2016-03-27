@@ -2,6 +2,10 @@
 
 <h1>Search Articles: <%= @keyword %></h1>
 
-<% @articles.each do |article| %>
+<% if @articles != nil %>
+  <% @articles.each do |article| %>
     <%= render partial: 'index_article', locals: {article: article} %>
+  <% end %>
+<% else %>
+  <h4>Your input is empty or There is no article found</h4>
 <% end %>

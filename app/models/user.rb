@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :last_name, format: { with: /\A[a-zA-Z]+\z/, message: "%{value} is not a valid last name" }
   validates :tag_list, format: { with: /\A[\w\s\,]*\z/, message: "%{value} is not a valid tag" }
   validates :username, uniqueness: true
+  validates :password, length: {minimum: 8}
 
   acts_as_taggable
   # Users can have interests

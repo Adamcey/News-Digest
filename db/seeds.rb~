@@ -8,12 +8,11 @@
 
 user = User.create!(first_name: 'Sang', last_name: 'Yu', 
 	email: 'yu@unimelb.edu.au', bio: 'Some really awesome author that wrote some stuff',
-	username: 'yusang', password: 'aaaaaaaa', password_confirmation: 'aaaaaaaa', subscribed: 'true', tag_list: 'afl')
+	username: 'yusang', password: 'aaa', password_confirmation: 'aaa', subscribed: 'true', tag_list: 'afl')
 
 Source.create!(name: 'SBS')
 Source.create!(name: 'TheAge')
-Source.create!(name: 'The Guardian')
-#Source.create!(name: 'TheABC')
+Source.create!(name: 'TheABC')
 Source.create!(name: 'The Herald Sun')
 Source.create!(name: 'The Sydney Morning Herald')
 Source.create!(name: 'The New York Times')

@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'rails', '4.2.5.1'
+# Use postgresql as the database for Active Record
+gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -15,7 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Emailing gem
-gem 'mandrill-api', '~> 1.0.53'
+#gem 'mandrill-api'
 gem 'mandrill_mailer'
 
 # Tagging gems
@@ -23,6 +23,9 @@ gem 'open_calais'
 gem 'sentimental'
 gem 'alchemy-api-rb', :require => 'alchemy_api'
 gem 'indico'
+
+# Use tags
+gem 'acts-as-taggable-on', '~> 3.4'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -36,11 +39,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# Use tags
-gem 'acts-as-taggable-on', '~> 3.4'
+# bootstrap
+gem 'bootstrap-sass'#, '~> 3.2.0'
+gem 'autoprefixer-rails'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'will_paginate', '~> 3.0', '>= 3.0.7'
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -65,4 +69,3 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
 end
-

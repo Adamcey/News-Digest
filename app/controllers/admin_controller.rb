@@ -16,8 +16,6 @@ class AdminController < ApplicationController
     @articles = Scrapers::Importer.new.import
     Taggers::TaggingMachine.new.tag(@articles)
 
-    #Article.storeData(@articles)
-
     redirect_to articles_url
   end
 end

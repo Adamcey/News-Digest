@@ -1,15 +1,20 @@
 <div class="panel panel-default">
   <div class="panel-body">
-  	<h2><%= article.title %></h2>
-    <small>Published On: <%= article.publication_date%></small>
-    <small>Author: <%= article.author%></small>
-  	<p>Link: <%= article.link %></p>
-    <p>Summary: <%= article.summary %></p>
-    <p>Images: <%= article.images %></p>
-  	<p>Section: <%= article.tag_list.join(', ') %></p>
-  	
-    <div class="btn-group pull-right" role="group">
-	  	<%= link_to 'Show', article, class: "btn btn-default" %>
-	  </div>
+    <div class="col-md-8">
+    	<h2><%= link_to article.title, article.link %></h2>
+      <p><small>Published On: <%= article.publication_date%></small></p>
+      <p><small>Author: <%= article.author%></small></p>
+      <p>Summary: <%= article.summary %></p>
+    	<p>Tags: <%= article.tag_list.join(', ') %></p>
+      <p>Source: <%= Source.where(source_id: article.source_id).name%></p>
+    </div>
+
+    <div class="col-md-4">
+      <p>
+        <% unless article.images.nil? %>
+            <img height="200" width="320" src="<%= article.images %>"/>
+        <%end%>
+      </p>
+    </div>
   </div>
 </div>

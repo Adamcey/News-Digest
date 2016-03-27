@@ -1,26 +1,32 @@
+<!-- Home page -->
 
 <div class="row">
-  	<div class="col-md-8">
+  <div class="col-md-8">
 		<div class="jumbotron">
 		  <h1>The Digest</h1>
-		  <p>News feeds.</p>
+		  <p>News feeds, including the latest New York Times, The Age, ABC News, The Guardian ...</p>
 		  <p><%= link_to 'Sign Up', new_user_path, class: "btn btn-default" %></p>
 		</div>
 	</div>
 	<div class="col-md-4">
 		<div class="panel panel-default">
-  			<div class="panel-heading">Log In!</div>
-  			<div class="panel-body">
+			<div class="panel-heading">Log In!</div>
+
+			<div class="panel-body">
 				<%= form_for(:credentials, url: login_path) do |f| %>
-				  	<div class="form-group">
+			  	<div class="form-group">
 						<%= f.label :username%>
 						<%= f.text_field :username, class: 'form-control'%>
 					</div>
+
 					<div class="form-group">
 						<%= f.label :password%>
 						<%= f.password_field :password, class: 'form-control'%>
 					</div>
-					<%= submit_tag %>
+					
+					<div class="form-group">
+						<%= f.submit 'Login', class: 'btn btn-default' %>
+					</div>
 				<% end %>
 			</div>
 		</div>

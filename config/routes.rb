@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   get 'users/subscribe', to: 'users#subscribe', as: :subscribe
 
   get 'articles/interests', to: 'articles#interests', as: :interests
-  get 'articles/scrape', to: 'articles#scrape', as: :scrape
   post 'articles/search', to: 'articles#search', as: :search
 
   get 'admin/email', to: 'admin#sendEmailToSubscribers', as: :sendEmails

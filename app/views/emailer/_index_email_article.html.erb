@@ -6,6 +6,7 @@
   	<p>Link: <%= article.link %></p>
     <p>Summary: <%= article.summary %></p>
     <p>Images: <%= article.images %></p>
-  	<p>Section: <%= article.tag_list.join(', ') %></p>
+  	<p>Tags: <%= article.tag_list.join(', ') %></p>
+  	<p>Source: <%= Source.find_by(article.source_id).name%></p>
   </div>
 </div>

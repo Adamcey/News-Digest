@@ -3,17 +3,24 @@ module Taggers
     def initialize
       @taggers = []
 
-      @taggers.push(TaggerIndico.new)
-
+      #@taggers.push(TaggerIndico.new)
+      #@taggers.push(TaggerOpencalais.new)
+      #@taggers.push(TaggerAlchemy.new)
+      @taggers.push(TaggerSentimental.new)
+      @taggers.push(TaggerAuth.new)
     end
 
     # Tag scraped articles
     def tag articles
       @taggers.each do |tagger|
-        tagger.generateTags(articles)
+        articles = tagger.generateTags(articles)
       end
 
-      #  return articles
+      articles.each do |article|
+        article.save
+      end
+
+      return articles
     end
   end
 end
