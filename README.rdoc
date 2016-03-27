@@ -1,11 +1,20 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A news subscribing website where users are able to read news articles scrapped from multiple news sources (e.g. New York Times, The Age, ABC News), or subscribe based on their interests.
+
+Some steps which are necessary to get the
+application up and running:
+
+1. Change hostname to be localhost in database.yml file.
+2. Run bundle install.
+3. Run rake db:migrate.
+4. Run rake db:seed.
+5. Type url: [domain]/admin/scrape to scrape articles.
+6. Login and enjoy.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version (2.2.4 / 2.3)
 
 * System dependencies
 
