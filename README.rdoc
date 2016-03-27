@@ -2,6 +2,8 @@
 
 A news subscribing website where users are able to read news articles scrapped from multiple news sources (e.g. New York Times, The Age, ABC News), or subscribe based on their interests.
 
+[Web link](https://dashboard.heroku.com/apps/news-digest/deploy/heroku-git)
+
 Some steps which are necessary to get the
 application up and running:
 
